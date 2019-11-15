@@ -1,6 +1,9 @@
 .gradle
+.mvn
 .idea
 out
 build
+target
 ci
+*.iml
 

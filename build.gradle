@@ -1,8 +1,8 @@
 
 plugins {
-    id 'org.jetbrains.kotlin.jvm' version '1.3.0'
-    id("io.spring.dependency-management") version "1.0.4.RELEASE"
-    id("org.springframework.boot") version "2.1.1.RELEASE"
+    id 'org.jetbrains.kotlin.jvm' version '1.3.50'
+    id("io.spring.dependency-management") version "1.0.8.RELEASE"
+    id("org.springframework.boot") version "2.1.8.RELEASE"
 }
 
 repositories {
@@ -15,12 +15,7 @@ repositories {
 
 group 'org.smartjava.kotlin'
 version '1.0-SNAPSHOT'
-
-dependencyManagement {
-    imports {
-        mavenBom("org.springframework.boot:spring-boot-dependencies:2.1.1.RELEASE")
-    }
-}
+java.sourceCompatibility = JavaVersion.VERSION_1_8
 
 dependencies {
 
@@ -55,6 +50,7 @@ dependencies {
 
 compileKotlin {
     kotlinOptions.jvmTarget = "1.8"
+    kotlinOptions.freeCompilerArgs = ["-Xjsr305=strict"]
 }
 compileTestKotlin {
     kotlinOptions.jvmTarget = "1.8"

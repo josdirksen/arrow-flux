@@ -1,7 +1,7 @@
 package org.smartjava.kotlin.itemservice.rest
 
-import arrow.effects.MonoK
-import arrow.effects.k
+import arrow.fx.reactor.MonoK
+import arrow.fx.reactor.k
 import org.springframework.web.reactive.function.server.ServerRequest
 import reactor.core.publisher.Mono
 import java.util.*

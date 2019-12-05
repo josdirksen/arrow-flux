@@ -1,8 +1,8 @@
 package org.smartjava.kotlin.itemservice.db
 
 import arrow.Kind
-import arrow.effects.ForFluxK
-import arrow.effects.ForMonoK
+import arrow.fx.reactor.ForFluxK
+import arrow.fx.reactor.ForMonoK
 import org.smartjava.kotlin.itemservice.db.StoreUtil.errorIfEmpty
 import org.smartjava.kotlin.itemservice.db.StoreUtil.mapToError
 import org.smartjava.kotlin.itemservice.model.Item

@@ -1,10 +1,15 @@
 package org.smartjava.kotlin.itemservice.db
 
-import arrow.effects.*
+import arrow.fx.*
+import arrow.fx.reactor.FluxK
+import arrow.fx.reactor.MonoK
+import arrow.fx.reactor.extensions.MonoKMonadThrow
+import arrow.fx.reactor.extensions.fx
+import arrow.fx.reactor.k
 import org.smartjava.kotlin.itemservice.model.Errors
 import org.springframework.dao.DuplicateKeyException
-import arrow.effects.monok.monadThrow.bindingCatch as monokBindingCatch
-import arrow.effects.fluxk.monadThrow.bindingCatch as fluxkBindingCatch
+//import arrow.effects.monok.monadThrow.bindingCatch as monokBindingCatch
+//import arrow.effects.fluxk.monadThrow.bindingCatch as fluxkBindingCatch
 
 import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
@@ -51,7 +56,7 @@ object StoreUtil {
      * us to use monad comprehensions on the resulting MonoK<T>
      */
     fun <T>asMono(thunk: () -> Mono<T>): MonoK<T> {
-        return monokBindingCatch {
+        return MonoK.fx {
             thunk().k().bind()
         }
     }
@@ -62,7 +67,7 @@ object StoreUtil {
      * us to use monad comprehensions on the resulting FluxK<T>
      */
     fun <T>asFlux(thunk: () -> Flux<T>): FluxK<T> {
-        return fluxkBindingCatch {
+        return FluxK.fx {
             thunk().k().bind()
         }
     }

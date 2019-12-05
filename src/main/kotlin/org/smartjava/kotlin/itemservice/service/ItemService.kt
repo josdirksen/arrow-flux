@@ -1,9 +1,10 @@
 package org.smartjava.kotlin.itemservice.service
 
 import arrow.Kind
-import arrow.effects.ForFluxK
-import arrow.effects.ForMonoK
-import arrow.effects.monok.monad.binding
+import arrow.fx.reactor.ForFluxK
+import arrow.fx.reactor.ForMonoK
+import arrow.fx.reactor.MonoK
+import arrow.fx.reactor.extensions.fx
 import org.smartjava.kotlin.itemservice.db.ItemRepository
 import org.smartjava.kotlin.itemservice.model.Item
 import java.util.*
@@ -18,7 +19,7 @@ interface ItemService<F, S> {
 
 class ReactiveItemService(val itemRepository: ItemRepository<ForMonoK, ForFluxK>) : ItemService<ForMonoK, ForFluxK> {
 
-    override fun updateItemIExistsAndReturnAllItems(toUpdate: UUID, description: String): Kind<ForMonoK, List<Item>> = binding {
+    override fun updateItemIExistsAndReturnAllItems(toUpdate: UUID, description: String): Kind<ForMonoK, List<Item>> = MonoK.fx {
         val existingItem = itemRepository.getItem(toUpdate).bind()
         val updatedItem = existingItem.copy(description = description)
         val storedItem = itemRepository.storeItem(updatedItem).bind()

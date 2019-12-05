@@ -1,7 +1,7 @@
 package org.smartjava.kotlin.itemservice.model
 
 import arrow.core.Option
-import arrow.instances.option.monad.binding
+import arrow.core.extensions.fx
 import java.util.*
 
 data class Item(val id: UUID = UUID.randomUUID(), val name: String, val description: String)
@@ -21,7 +21,7 @@ object pp {
             }
         }
 
-        val optionItem2 = binding {
+        val optionItem2 = Option.fx {
             val uuid = optionUUID.bind()
             val name = optionName.bind()
             val description = optionName.bind()
